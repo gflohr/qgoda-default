@@ -1,0 +1,75 @@
+# YAML description for the theme qgoda-default.
+#
+# Reserved keys, do not use:
+#_srcdir: will contain the (local) checkout directory
+
+_exclude:
+  - /README.md
+  - /package.json
+  # These are always excluded.
+  # - /_config.yaml
+  # - /_config.yml
+_precious:
+  - '*.md'
+  - '*.markdown'
+  - '*.mkdn'
+  - /_js/index.js
+  - /_scss/_style.scss
+_tasks:
+  - node
+
+# Dev dependencies for npm.
+_node_dev_dependencies:
+  # Development web server.
+  - browser-sync
+  - ajv
+  # SCSS/SASS support.
+  - node-sass
+  # Bundling.
+  - webpack
+  - extract-text-webpack-plugin
+  # Loaders for webpack.
+  - css-loader
+  - sass-loader
+  - style-loader
+  - postcss-loader
+  # Write latest and greatest CSS even for older browsers.
+  - postcss-scss
+  - postcss-cssnext
+  # Minimize CSS.
+  - cssnano
+  # Bootstrap and Dependencies.
+  - bootstrap@4.0.0-beta
+  - jquery
+  - popper.js
+  - tether
+
+# This gets merged into package.json.
+_package:
+  scripts:
+    xprestart: 'npm install'
+    start: 'webpack --progress --colors --watch'
+    build: 'webpack --progress --colors'
+    prebuild: 'npm install'
+    server: 'browser-sync start --server _site --files _timestamp'
+    test: 'echo "Error: no test specified"; exit 1'
+  postcss:
+    parser: 'postcss-scss'
+    plugins:
+      cssnano: {}
+      postcss-cssnext: {}
+
+# The rest goes into _config.yaml.
+title: Qgoda Webpack Seed Project
+exclude:
+  - /package.json
+  - /package.lock.json
+  - /node_modules
+  - webpack.config.js
+helpers:
+  npm: npm start
+  'browser-sync': npm run server
+defaults:
+  /:
+    values:
+      lingua: en-us

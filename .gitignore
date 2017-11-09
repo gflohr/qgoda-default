@@ -1,0 +1,8 @@
+/node_modules
+/package.json
+/package-lock.json
+/webpack.config.js
+/assets
+/_site
+/_timestamp
+/.gitignore

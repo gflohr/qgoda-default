@@ -1,0 +1,11 @@
+/* Override bootstrap variables before importing, for example:
+$font-size-base: 1.1rem;
+$lead-font-weight: 700;
+*/
+@import "~bootstrap/scss/bootstrap";
+
+/* Taken from getbootstrap.com/docs/4.0/examples/blog/ */
+@import "blog";
+
+/* Import site-specific (S)CSS.  */
+@import "style";

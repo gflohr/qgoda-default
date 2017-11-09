@@ -1,0 +1,34 @@
+[% USE gtx = Gettext %]
+[% USE q = Qgoda %]
+    <header>
+      <div class="blog-masthead">
+        <div class="container">
+          <nav class="nav">
+            <a class="nav-link active" 
+               href="[% q.llink(name => 'home') %]">
+              [% gtx.gettext('Home') %]
+            </a>
+            <a class="nav-link" href="#">New features</a>
+            <a class="nav-link" href="#">Press</a>
+            <a class="nav-link" href="#">New hires</a>
+            <a class="nav-link" href="#">About</a>
+          </nav>
+        </div>
+      </div>
+
+      <div class="blog-header">
+        <div class="container">
+          <h1 class="blog-title">[% asset.title | html %]</h1>
+          [% IF asset.type == 'page' %]
+          <p class="lead blog-description">[% asset.subtitle | html %]</p>
+          [% ELSE %]
+          <p class="lead blog-description">
+              [% gtx.xgettext('{date} by {author}',
+                              date => q.strftime(gtx.gettext('%B, %d %Y'),
+                                                 asset.date.epoch),
+                              author => asset.author || config.author) %]
+          </p>
+          [% END %]
+        </div>
+      </div>
+    </header>

@@ -1,0 +1,26 @@
+---
+title: Qgoda Webpack Seed
+author: Guido Flohr
+lingua: en-us
+exclude:
+  - /package.json
+  - /package.lock.json
+  - /node_modules
+  - webpack.config.js
+helpers:
+  browser-sync: npm run server
+  npm: npm start
+scripts:
+  - /assets/bundle.min.js
+styles:
+  - /assets/bundle.min.css
+defaults:
+  - files:
+    values:
+      lingua: en-us
+  - files: posts/**/*.md
+    values:
+      type: post
+  - files: /de/**/*.md
+    values:
+      lingua: de-de

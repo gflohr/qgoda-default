@@ -1,0 +1,20 @@
+[% USE q = Qgoda %]
+[% USE gtx = Gettext %]
+  <h2>post listing</h2>
+[% FOREACH post IN q.llistPosts %]
+  <div class="blog-listing">
+    <h2 class="blog-post-title">[% post.title %]</h3>
+    <p class="blog-post-meta">
+        [% gtx.xgettext('{date} by {author}',
+                        date => q.strftime(gtx.gettext('%B, %d %Y'),
+                        asset.date.epoch),
+                        author => asset.author || config.author) 
+         %]
+    </p>
+    <p>[% post.excerpt %]</p>
+  </div>
+
+  <p>
+    <a href="[% post.permalink %]">[% gtx.gettext('more') %]</a>
+  </p>
+[% END %]

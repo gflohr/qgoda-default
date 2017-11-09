@@ -1,0 +1,2 @@
+[%- global.scripts = config.scripts -%]
+[%- global.styles = config.styles -%]

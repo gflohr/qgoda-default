@@ -1,7 +1,9 @@
 [% USE q = Qgoda %]
 [% USE gtx = Gettext %]
-  <h2>post listing</h2>
-[% FOREACH post IN q.llistPosts %]
+[% posts = q.llistPosts %]
+[% IF posts.size %]
+  [% p = q.pagination(start = asset.start, total = posts.size) %]
+  [% FOREACH post IN posts.splice(p.start, p.per_page) %]
   <div class="blog-listing">
     <h2 class="blog-post-title">[% post.title %]</h3>
     <p class="blog-post-meta">
@@ -17,4 +19,35 @@
   <p>
     <a href="[% post.permalink %]">[% gtx.gettext('more') %]</a>
   </p>
+  [% END %]
+
+  [% IF p.total_pages > 1 %]
+  <nav aria-label="[% gtx.gettext('Page navigation') %]">
+    <ul class="pagination">
+      <li class="page-item[% UNLESS p.previous_link %] disabled[% END %]">
+        <a href="[% p.previous_link %]" 
+           class="page-link">[% gtx.gettext('Newer') %]</a>
+      </li>
+      [%- page = 0 %]
+      <!-- Displaying the page numbers is probably not very helpful.
+           Remove the loop, if you think it is not needed.  -->
+      [%- FOREACH link IN p.links %]
+      <li class="page-item[% IF page == p.page0 %] active[% END %]">
+        <a href="[% p.links.$page %]" class="page-link"
+           tabindex="[% p.tabindices.$page %]">
+             [%- page = page + 1 -%]
+             [%- page -%]
+           </a>
+      </li>
+      [% END %]
+      <li class="page-item [%- IF !p.next_link %] disabled[% END %]">
+        <a href="[% p.next_link %]"
+           class="page-link">[% gtx.gettext('Older') %]</a>
+      </li> 
+    </ul>
+  </nav>
+   [% IF p.next_start %]
+     [% q.clone(location = p.next_location start = p.next_start) %]
+   [% END %]
+  [% END %]
 [% END %]

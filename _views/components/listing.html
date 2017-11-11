@@ -1,24 +1,22 @@
-[% USE q = Qgoda %]
-[% USE gtx = Gettext %]
-[% posts = q.llistPosts %]
-[% IF posts.size %]
-  [% p = q.pagination(start = asset.start, total = posts.size) %]
-  [% FOREACH post IN posts.splice(p.start, p.per_page) %]
+[%- USE q = Qgoda -%]
+[%- USE gtx = Gettext -%]
+[%- posts = q.llistPosts -%]
+[%- IF posts.size -%]
+  [%- p = q.pagination(start = asset.start, total = posts.size) -%]
+  [%- FOREACH post IN posts.splice(p.start, p.per_page) -%]
   <div class="blog-listing">
-    <h2 class="blog-post-title">[% post.title %]</h3>
+    <h2 class="blog-post-title">[% post.title %]</h2>
     <p class="blog-post-meta">
         [% gtx.xgettext('{date} by {author}',
-                        date => q.strftime(gtx.gettext('%B, %d %Y'),
-                        asset.date.epoch),
-                        author => asset.author || config.author) 
+                        date = q.strftime(gtx.gettext('%B, %d %Y'),
+                                          asset.date.epoch),
+                        author = asset.author || config.author) 
          %]
     </p>
     <p>[% post.excerpt %]</p>
+    <a class="more-link" 
+       href="[% post.permalink %]">[% gtx.gettext('more') %]</a>
   </div>
-
-  <p>
-    <a href="[% post.permalink %]">[% gtx.gettext('more') %]</a>
-  </p>
   [% END %]
 
   [% IF p.total_pages > 1 %]
@@ -50,4 +48,4 @@
      [% q.clone(location = p.next_location start = p.next_start) %]
    [% END %]
   [% END %]
-[% END %]
+[% END -%]

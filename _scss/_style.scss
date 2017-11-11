@@ -1,3 +1,6 @@
 /* Site-specific (S)CSS.  This file gets imported by 'bundle.scss' in the
  * same directory.  You can use SCSS or plain CSS.
  */
+.blog-listing {
+    margin-bottom: 2rem; 
+}

@@ -78,6 +78,8 @@ exclude:
   - /yarn.lock
   - /LICENSE
   - /README.md
+exclude_watch:
+  - "*.config.js"
 helpers:
   webpack: npm start
   'browser-sync': npm run server

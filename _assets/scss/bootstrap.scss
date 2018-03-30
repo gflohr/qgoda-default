@@ -5,8 +5,14 @@ $warning-opaque: rgba(217, 115, 25, 0.75);
 
 @import '~bootstrap/scss/bootstrap.scss';
 
-// Override bootstrap styles:
+// Taken from getbootstrap.com/docs/4.0/examples/blog/
+@import "blog";
 
+// Override more bootstrap styles.
 .figure img {
     width: 100%;
+}
+
+.blog-listing {
+    margin-bottom: 2rem;
 }

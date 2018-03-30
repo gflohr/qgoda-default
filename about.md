@@ -1,5 +1,5 @@
 ---
-title: About Qgoda
+title: About Qgoda-Default
 name: about
 type: page
 ---

@@ -1,0 +1,14 @@
+[% USE q = Qgoda %]
+ [% months = ['January', 'February', 'March', 'April',
+             'May', 'June', 'July', 'August',
+             'September', 'October', 'November', 'December'] %]
+<h4>Archive</h4>
+<ol class="list-unstyled">
+[% FOREACH year IN q.listPosts().vmap('date.year').unique().nsort().reverse() %]
+    [% FOREACH month IN q.llistPosts('date.year' = year).vmap('date.month').unique().sort().reverse() %]
+      [% month0 = month - 1 %]
+  <li><a href="/archive/[% year %]/[% month %]/">[% months.$month0 %] [% year %]</a></li>
+    [% END %]
+[% END %]
+</ol>
+

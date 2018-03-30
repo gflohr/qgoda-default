@@ -1,7 +1,7 @@
 [% USE q = Qgoda %]
 <h4>Tags</h4>
-<p>
+<p class="[% css.main.taglist %]">
 [% FOREACH tag IN q.taxonomyValues('tags') %]
-<a href="/tags/[% tag.slugify %]/">#[% tag %]</a>
+<a class="[% css.main.taglist_link %]" href="/tags/[% tag.slugify %]/">#[% tag %]</a>
 [% END %]
 </p>

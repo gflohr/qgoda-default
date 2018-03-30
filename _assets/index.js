@@ -22,5 +22,5 @@ require('prismjs/plugins/custom-class/prism-custom-class');
 require('./scss/prism.scss');
 Prism.plugins.customClass.map(require('./scss/prism.scss.json'));
 
-require('./scss/qgoda-default.scss');
+require('./scss/styles.scss');
 require('./scss/toc.scss');

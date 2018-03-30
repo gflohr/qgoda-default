@@ -14,7 +14,7 @@ Qgoda templates are called "views" and are by default searched in the directory 
 
 The default template `_views/default.html` looks pretty simple at first glance, but pretty weird at second:
 
-```
+```markup
 [%- PROCESS functions/setup.tt -%]
 [%- body = PROCESS partials/body.html %]
 [%- head = PROCESS partials/head.html %]
@@ -34,14 +34,14 @@ Or imagine that rendering a specific part of the body requires adding CSS files 
 
 You can avoid all these problems by first taking care of the body before you do the head:
 
-```
+```markup
 [%- body = PROCESS partials/body.html %]
 [%- head = PROCESS partials/head.html %]
 ```
 
 But you do not render them into a page but into memory, into the variables `body` and `head`.  All that is left to do, is to spit them out in the opposite order:
 
-```
+```markup
 [%- head %]
 [% body %]
 ```
@@ -52,7 +52,7 @@ Problem solved!
 
 The rendering of the head and body as described above is actually a little bit more:
 
-```
+```markup
 [%- WRAPPER wrappers/html5.html %]
 [%- head %]
 [% body %]
@@ -74,7 +74,7 @@ The variable `content` contains whatever you had put between `[% WRAPPER %]` and
 
 The first line includes the file `functions/setup.tt` that is used for executing Template Toolkit code that should affect all modules of the template:
 
-```
+```markup
 [%- PROCESS functions/setup.tt -%]
 ```
 
@@ -88,7 +88,7 @@ The default template that ships with this theme is so unspecific that you will f
 
 You can include different modules based on document variables:
 
-```
+```markup
 [% IF asset.type == 'start-page' %]
   [% INCLUDE partials/body/banner.html %]
 [% ELSE %]

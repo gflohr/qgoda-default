@@ -1,0 +1,13 @@
+// Set styles specific to qgoda-default theme.
+.taglist {
+    font-family: "Open Sans", Arial, Helvetica, Sans-Serif;
+
+    .taglist-link {
+        color: #888888;
+    }
+
+    .taglist-link:hover {
+        color: #007bff;
+        text-decoration: none;
+    }
+}

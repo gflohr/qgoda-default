@@ -6,20 +6,20 @@
 		'tt2': {
 			pattern: tt2_pattern,
 			inside: {
-                                'comment': {
-                                        pattern: /(^|[^\\$])#.*/,
-                                        lookbehind: true
-                                },
+				'comment': {
+					pattern: /(^|[^\\$])#.*/,
+					lookbehind: true
+				},
 				'delimiter': {
 					pattern: /^(?:\[%|%%)-?|-?%]$/i,
 					alias: 'punctuation'
 				},
 				'string': /(["'])(?:\\.|(?!\1)[^\\\r\n])*\1/,
 				'number': /\b0x[\dA-Fa-f]+\b|(?:\b\d+\.?\d*|\B\.\d+)(?:[Ee][+-]?\d+)?/,
-                                'keyword': /\b(?:GET|CALL|SET|DEFAULT|INSERT|INCLUDE|PROCESS|WRAPPER|BLOCK|IF|UNLESS|ELSIF|ELSE|SWITCH|CASE|FOREACH|WHILE|FILTER|USE|MACRO|RAWPERL|PERL|TRY|THROW|CATCH|FINAL|NEXT|LAST|RETURN|STOP|CLEAR|META|TAGS|DEBUG)\b/,
-                                'operator': /\b(?:=>|==|!=|<|<=|>|>=|&&\|\|!|and|or|not|\.)\b/,
+				'keyword': /\b(?:GET|CALL|SET|DEFAULT|INSERT|INCLUDE|PROCESS|WRAPPER|BLOCK|IF|UNLESS|ELSIF|ELSE|SWITCH|CASE|FOREACH|WHILE|FILTER|USE|MACRO|RAWPERL|PERL|TRY|THROW|CATCH|FINAL|NEXT|LAST|RETURN|STOP|CLEAR|META|TAGS|DEBUG)\b/,
+				'operator': /\b(?:=>|==|!=|<|<=|>|>=|&&\|\|!|and|or|not)\b/,
 				'punctuation': /[[\]{},]/,
-				'variable': /[a-zA-Z][\.a-zA-Z0-9]*/
+				'variable': /[a-zA-Z][\.\/\$a-zA-Z0-9]*/
 			}
 		}
 	});

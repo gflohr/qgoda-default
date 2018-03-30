@@ -6,6 +6,8 @@
 _exclude:
   - /README.md
   - /package.json
+  - /node_modules
+  - /package-lock.json
   # These are always excluded.
   # - /_config.yaml
   # - /_config.yml
@@ -47,10 +49,10 @@ _node_dev_dependencies:
 # This gets merged into package.json.
 _package:
   scripts:
-    xprestart: 'npm install'
+    prestart: 'npm install'
     start: 'webpack --progress --colors --watch'
-    build: 'webpack --progress --colors'
     prebuild: 'npm install'
+    build: 'webpack --progress --colors'
     server: 'browser-sync start --server _site --files _timestamp'
     test: 'echo "Error: no test specified"; exit 1'
   postcss:
@@ -67,9 +69,19 @@ exclude:
   - /node_modules
   - webpack.config.js
 helpers:
-  npm: npm start
+  webpack: npm start
   'browser-sync': npm run server
 defaults:
-  /:
+  - files:
+      - '*.md'
     values:
+      author: Guido Flohr
       lingua: en-us
+      organization: cantanea EOOD
+      type: post
+  - files:
+      - index.md
+      - index-*.md
+    values:
+      priority: -1
+      type: page

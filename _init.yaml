@@ -30,12 +30,16 @@ _node_dev_dependencies:
   # Bundling.
   - webpack
   - webpack-cli
+  # Webpack plug-ins
   - extract-text-webpack-plugin@next
+  - clean-webpack-plugin
+  - timestamp-webpack-plugin
   # Loaders for webpack.
   - css-loader
   - sass-loader
-  - style-loader
   - postcss-loader
+  - file-loader
+  - url-loader
   # Write latest and greatest CSS even for older browsers.
   - postcss-scss
   - postcss-cssnext
@@ -46,6 +50,12 @@ _node_dev_dependencies:
   - popper.js
   - tether
   - bootstrap@4.0.0-beta
+  # Other packages
+  - font-awesome
+  - prismjs
+  - postcss-import
+  - postcss-modules
+  - postcss-font-magician
 
 # This gets merged into package.json.
 _package:
@@ -56,11 +66,6 @@ _package:
     build: 'webpack --progress --colors'
     server: 'browser-sync start --server _site --files _timestamp'
     test: 'echo "Error: no test specified"; exit 1'
-  postcss:
-    parser: 'postcss-scss'
-    plugins:
-      cssnano: {}
-      postcss-cssnext: {}
 
 # The rest goes into _config.yaml.
 title: Qgoda Webpack Seed Project
@@ -68,7 +73,11 @@ exclude:
   - /package.json
   - /package.lock.json
   - /node_modules
-  - webpack.config.js
+  - /webpack.config.js
+  - /postcss.config.js
+  - /yarn.lock
+  - /LICENSE
+  - /README.md
 helpers:
   webpack: npm start
   'browser-sync': npm run server

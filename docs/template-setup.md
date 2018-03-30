@@ -8,6 +8,10 @@ tags: [ Templates, Cache-Busting, CSS, JavaScript ]
 [% TAGS [@ @] %]
 Setting up some global logic that is available in all modules of the templates is usually a good idea.  You should always do that from the root of your template tree and use the `PROCESS` directive of the [Template Toolkit](http://www.http://www.template-toolkit.org/), and *not* `INCLUDE` for that.
 
+<qgoda-toc/>
+
+## Default Template
+
 The first line of the [default template]([@ q.link(name = 'templates') @]) looked like this:
 
 ```

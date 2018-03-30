@@ -2,7 +2,7 @@
 [%- USE gtx = Gettext -%]
 [%- posts = q.llistPosts -%]
 [%- IF posts.size -%]
-  [%- p = q.pagination(start = asset.start, total = posts.size) -%]
+  [%- p = q.paginate(start = asset.start, total = posts.size) -%]
   [%- FOREACH post IN posts.splice(p.start, p.per_page) -%]
   <div class="blog-listing">
     <h2 class="blog-post-title">[% post.title %]</h2>

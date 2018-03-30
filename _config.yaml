@@ -4,7 +4,7 @@ author: Guido Flohr
 lingua: en-us
 exclude:
   - /package.json
-  - /package.lock.json
+  - /package-lock.json
   - /node_modules
   - webpack.config.js
 helpers:

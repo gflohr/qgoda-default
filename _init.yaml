@@ -29,7 +29,8 @@ _node_dev_dependencies:
   - node-sass
   # Bundling.
   - webpack
-  - extract-text-webpack-plugin
+  - webpack-cli
+  - extract-text-webpack-plugin@next
   # Loaders for webpack.
   - css-loader
   - sass-loader
@@ -41,10 +42,10 @@ _node_dev_dependencies:
   # Minimize CSS.
   - cssnano
   # Bootstrap and Dependencies.
-  - bootstrap@4.0.0-beta
   - jquery
   - popper.js
   - tether
+  - bootstrap@4.0.0-beta
 
 # This gets merged into package.json.
 _package:
@@ -71,6 +72,13 @@ exclude:
 helpers:
   webpack: npm start
   'browser-sync': npm run server
+# We need fenced code blocks.
+processors:
+  chains:
+    markdown:
+      modules:
+      - TT2
+      - Hoedown
 defaults:
   - files:
       - '*.md'
@@ -85,3 +93,9 @@ defaults:
     values:
       priority: -1
       type: page
+global:
+  scripts: [/assets/bundle.min.js]
+  styles: [/assets/bundle.min.css]
+# This is only needed for the theme documentation.  You can safely delete it,
+# if you don't need the theme docs any more.
+theme_repo: gflohr/qgoda-default

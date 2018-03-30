@@ -1,35 +1,35 @@
-[%- USE q = Qgoda -%]
-[%- USE gtx = Gettext -%]
-[%- posts = q.llistPosts -%]
-[%- IF posts.size -%]
-  [%- p = q.paginate(start = asset.start, total = posts.size) -%]
+[% USE q = Qgoda %]
+[% posts = q.listPosts(filter).nsortBy('date').reverse() %]
+[% IF posts.size %]
+  [% IF !per_page %][% per_page = 10 %][% END %]
+  [% start = asset.start || 0 %]
+  [% asset.start = 0 # Important for recursions! Cloned documents will
+                     # always have an explicit value passed in the call
+                     # to clone() %]
+  [% p = q.paginate(start = start total = posts.size per_page = per_page) %]
   [%- FOREACH post IN posts.splice(p.start, p.per_page) -%]
   <div class="blog-listing">
     <h2 class="blog-post-title">[% post.title %]</h2>
     <p class="blog-post-meta">
-        [% gtx.xgettext('{date} by {author}',
-                        date = q.strftime(gtx.gettext('%B, %d %Y'),
-                                          asset.date.epoch),
-                        author = asset.author || config.author) 
-         %]
+        [% q.strftime('%B, %d %Y', post.date) %] 
+        by 
+        [% post.author | html %]
+        [% IF post.organization %]- [% post.organization | html %][% END %]
     </p>
     <p>[% post.excerpt %]</p>
-    <a class="more-link" 
-       href="[% post.permalink %]">[% gtx.gettext('more') %]</a>
+    <a class="more-link" href="[% post.permalink %]">more</a>
   </div>
-  [% END %]
+  [%- END -%]
 
-  [% IF p.total_pages > 1 %]
-  <nav aria-label="[% gtx.gettext('Page navigation') %]">
+  [%- IF p.total_pages > 1 -%]
+  [%- SET page = 0 -%]
+  <div><nav aria-label="Pagination">
     <ul class="pagination">
       <li class="page-item[% UNLESS p.previous_link %] disabled[% END %]">
-        <a href="[% p.previous_link %]" 
-           class="page-link">[% gtx.gettext('Newer') %]</a>
+        <a class="page-link" href="[% p.previous_link %]">Newer</a>
       </li>
-      [%- page = 0 %]
-      <!-- Displaying the page numbers is probably not very helpful.
-           Remove the loop, if you think it is not needed.  -->
-      [%- FOREACH link IN p.links %]
+
+      [%- FOREACH link IN p.links -%]
       <li class="page-item[% IF page == p.page0 %] active[% END %]">
         <a href="[% p.links.$page %]" class="page-link"
            tabindex="[% p.tabindices.$page %]">
@@ -37,15 +37,16 @@
              [%- page -%]
            </a>
       </li>
-      [% END %]
-      <li class="page-item [%- IF !p.next_link %] disabled[% END %]">
-        <a href="[% p.next_link %]"
-           class="page-link">[% gtx.gettext('Older') %]</a>
-      </li> 
+      [%- END -%]
+
+      <li class="page-item[% UNLESS p.next_link %] disabled[% END %]">
+        <a class="page-link" href="[% p.next_link %]">Older</a>
+      </li>
     </ul>
-  </nav>
-   [% IF p.next_start %]
-     [% q.clone(location = p.next_location start = p.next_start) %]
-   [% END %]
-  [% END %]
-[% END -%]
+    [%- IF p.next_start -%]
+      [% q.clone(location = p.next_location start = p.next_start) %]
+    [%- END -%]
+  </nav></div>
+  [%- END -%]
+[%- END -%]
+

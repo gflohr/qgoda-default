@@ -5,7 +5,7 @@ date: 2018-03-20
 tags: [ General, Configuration ]
 ---
 [% USE q = Qgoda %]
-Qgoda's main configuration file is `_config.yaml`.  Note that you currently have to [restart Qgoda]([% q.linkPost(name = 'starting-qgoda') %]) in order to take changes to the configuration into effect.
+Qgoda's main configuration file is `_config.yaml`.  Note that you currently have to [restart Qgoda]([% q.link(name = 'starting-qgoda') %]) in order to take changes to the configuration into effect.
 
 The source of the configuration comes from the theme file [`_init.yaml`](https://github.com/gflohr/qgoda-essential/blob/master/_init.yaml) that does not get installed with the theme.  Instead, it is used for initializing `_config.yaml` or gets merged into an already existing `_config.yaml`.
 
@@ -50,7 +50,7 @@ You can find a detailed explanation for setting document defaults in `_config.ya
 
 ## Markdown Processor Chain
 
-As described in [[% q.xref('title', name = 'installation') %]]([% q.linkPost(name = 'installation') %]#hoedown), it is preferable to use the Hoedown markdown processor instead of the regular one.  This is achieved by re-configuring the processor chain for markdown files:
+As described in [[% q.xref('title', name = 'installation') %]]([% q.link(name = 'installation') %]#hoedown), it is preferable to use the Hoedown markdown processor instead of the regular one.  This is achieved by re-configuring the processor chain for markdown files:
 
 ```yaml
 processors:

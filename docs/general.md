@@ -19,7 +19,7 @@ starting point.
 All those that prefer to roll their own version will find everything they
 need here:
 
-- a typical [site structure]([% q.llinkPost(name = 'site-structure') %])
+- a typical [site structure]([% q.link(name = 'site-structure') %])
 - typical template structure
 - page listings
 - pagination

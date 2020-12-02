@@ -73,7 +73,7 @@ $ cd SOME_DIRECTORY
 $ qgoda init --force [% config.theme_repo %]
 ```
 
-This will also overwrite the [configuration]([% q.llinkPost(name = 'configuration') %]) file `_config.yaml`.  More precisely, it will merge the new upstream version into your local configuration.
+This will also overwrite the [configuration]([% q.link(name = 'configuration') %]) file `_config.yaml`.  More precisely, it will merge the new upstream version into your local configuration.
 
 Finally, you can also specify `--force` twice:
 

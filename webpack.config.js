@@ -1,13 +1,11 @@
-const webpack = require('webpack'),
-     ExtractTextPlugin = require('extract-text-webpack-plugin'),
-     CleanWebpackPlugin = require('clean-webpack-plugin'),
-     TimestampWebpackPlugin = require('timestamp-webpack-plugin'),
-     UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 module.exports = {
   mode: 'production',
     watchOptions: {
-      ignored: "**/*.json"
+      ignored: '**/*.json'
   },
   entry: {
       bundle: './_assets',
@@ -16,85 +14,79 @@ module.exports = {
     path: __dirname + '/assets',
     filename: '[name].min.js'
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {},
+      }),
+    ],
+  },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                sourceMap: true,
-                minimize: true
-              }
+        test: /\.css$/i,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                    },
+                  ],
+                ],
+              },
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
-        })
+          },
+        ],
       },
       {
-        test: /\.scss$/,
-        exclude: /(bootstrap|font-awesome|toc)\.scss$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 2,
-                sourceMap: true,
-                //minimize: true
-              }
+        test: /\.s[ac]ss$/i,
+        use: [
+          // Creates `style` nodes from JS strings
+          'style-loader',
+          // Translates CSS into CommonJS
+          'css-loader',
+          {
+            loader: 'postcss-loader',
+            options: {
+              postcssOptions: {
+                plugins: [
+                  [
+                    'postcss-preset-env',
+                    {
+                      // Options
+                    },
+                  ],
+                ],
+              },
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                  sourceMap: true
-              }
-            }
-          ]
-        }),
-      },
-      {
-        test: /(bootstrap|font-awesome|toc).scss$/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                importLoaders: 1,
-                sourceMap: true,
-                minimize: true
-              }
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                sourceMap: true
-              }
-            }
-          ]
-        }),
+          },
+          // Compiles Sass to CSS
+          'sass-loader',
+        ],
       },
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "url-loader?limit=10000&mimetype=application/font-woff"
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 10000,
+              mimetype: 'application/font-woff'
+            }
+          }
+        ]
       },
       { 
         test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        loader: "file-loader"
+        loader: 'file-loader'
       },
       {
         test: /\.(png|gif|svg|jpe?g)$/,
@@ -104,20 +96,12 @@ module.exports = {
   },
   devtool: 'source-map',
   plugins: [
-    new CleanWebpackPlugin(['assets']),
+    new CleanWebpackPlugin(),
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery',
       'window.jQuery': 'jquery',
       Popper: ['popper.js', 'default'],
-    }),
-    new UglifyJSPlugin({
-      sourceMap: true
-    }),
-    new ExtractTextPlugin('[name].min.css'),
-    new TimestampWebpackPlugin({
-      path: __dirname,
-      filename: '_timestamp.json'
     })
   ]
 };

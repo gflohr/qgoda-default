@@ -1,4 +1,4 @@
-[% USE q = Qgoda %]
+[%- USE q = Qgoda %]
 [% posts = q.listPosts(filters).nsortBy('date').reverse() %]
 [% IF posts.size %]
   [% IF !per_page %][% per_page = 10 %][% END %]
@@ -7,8 +7,7 @@
                      # always have an explicit value passed in the call
                      # to clone() %]
   [% p = q.paginate(start = start total = posts.size per_page = per_page) %]
-  [%- FOREACH post IN posts.splice(p.start, p.per_page) -%]
-  <div class="blog-listing">
+  [%- FOREACH post IN posts.splice(p.start, p.per_page) -%]<div class="blog-listing">
     <h2 class="blog-post-title">[% post.title %]</h2>
     <p class="blog-post-meta">
         [% q.strftime('%B, %d %Y', post.date) %] 

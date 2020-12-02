@@ -2,7 +2,7 @@
 require('bootstrap');
 
 require('./scss/bootstrap.scss');
-//require('./scss/font-awesome.scss');
+require('./scss/font-awesome.scss');
 
 // Prism.
 var Prism = require('prismjs');

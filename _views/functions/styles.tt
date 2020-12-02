@@ -1,9 +1,9 @@
 [% USE q = Qgoda %]
 [% seen = {} %]
-[% FOREACH style IN global.styles %]
+[% FOREACH style IN config.styles %]
   [%- NEXT IF seen.$style; seen.$style = 1 %]
   [%- IF (style.match('^(/)')) %]
-  <link href="[% q.bust_cache(style) | url %]" rel="stylesheet">
+  <link href="[% q.bustCache(style) | url %]" rel="stylesheet">
   [%- ELSE %]
   <style>[% style %]</style>
   [%- END %]
